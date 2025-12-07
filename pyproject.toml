@@ -7,10 +7,10 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
-grpcio = "^1.76.0"
-grpcio-tools = "^1.76.0"
-pydantic = "^2.12.5"
+python = ">=3.12"
+grpcio = ">=1.76.0"
+grpcio-tools = ">=1.76.0"
+pydantic = ">=2.12.5"
 
 [tool.poetry.group.dev.dependencies]
 # добавьте сюда dev-зависимости если есть
