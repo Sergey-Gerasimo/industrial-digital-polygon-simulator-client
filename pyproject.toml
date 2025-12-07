@@ -1,0 +1,20 @@
+[project]
+name = "industrial-digital-polygon-simulator-client"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Sergey",email = "gerasimovsergey2004@gmail.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "grpcio (>=1.76.0,<2.0.0)",
+    "grpcio-tools (>=1.76.0,<2.0.0)",
+    "pydantic (>=2.12.5,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

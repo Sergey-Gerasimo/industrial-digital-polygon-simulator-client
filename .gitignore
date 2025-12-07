@@ -1,0 +1,7 @@
+.venv
+poetry.lock
+docker-compose.yaml
+
+__pycache__
+
+main.py 
