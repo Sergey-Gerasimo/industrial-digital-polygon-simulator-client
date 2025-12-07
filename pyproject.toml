@@ -1,10 +1,13 @@
 [tool.poetry]
 name = "industrial-digital-polygon-simulator-client"
 version = "0.1.0"
-description = ""
+description = "Client for Industrial Digital Polygon Simulator"
 authors = ["Sergey <gerasimovsergey2004@gmail.com>"]
 license = "MIT"
 readme = "README.md"
+packages = [
+    {include = "src/simulation_client", from = "src"},
+]
 
 [tool.poetry.dependencies]
 python = ">=3.12"
@@ -13,7 +16,6 @@ grpcio-tools = ">=1.76.0"
 pydantic = ">=2.12.5"
 
 [tool.poetry.group.dev.dependencies]
-# добавьте сюда dev-зависимости если есть
 
 [build-system]
 requires = ["poetry-core>=2.0.0"]
