@@ -11,7 +11,11 @@ import subprocess
 def get_pytest_cmd():
     """Get pytest command (with poetry if available)."""
     try:
-        result = subprocess.run(["poetry", "run", "python", "-c", "import pytest"], capture_output=True, text=True)
+        result = subprocess.run(
+            ["poetry", "run", "python", "-c", "import pytest"],
+            capture_output=True,
+            text=True,
+        )
         if result.returncode == 0:
             return ["poetry", "run", "pytest"]
     except Exception:
@@ -22,7 +26,7 @@ def get_pytest_cmd():
 async def run_smoke_tests():
     """Run smoke tests."""
     cmd = get_pytest_cmd() + [
-        "tests/integration/test_service_availability.py",
+        "tests/integration/test_service_availability_fixed.py",
         "--tb=short",
         "--verbose",
         "-x",  # Stop on first failure
