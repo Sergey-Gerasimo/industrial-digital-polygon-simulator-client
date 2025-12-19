@@ -197,6 +197,12 @@ def proto_to_dict(proto) -> Dict:
 
     for field in proto.DESCRIPTOR.fields:
         field_name = field.name
+
+        # Для optional scalar полей (proto3 с presence) пропускаем,
+        # если поле не установлено, чтобы не подставлять значения по умолчанию
+        if getattr(field, "has_presence", False) and not proto.HasField(field_name):
+            continue
+
         value = getattr(proto, field_name)
 
         # Проверяем тип поля
