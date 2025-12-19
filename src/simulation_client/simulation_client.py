@@ -1626,10 +1626,20 @@ class AsyncSimulationClient(AsyncBaseClient):
         )
 
     def _process_graph_to_proto(self, process_graph: "ProcessGraph"):
-        """Конвертировать ProcessGraph в protobuf ProcessGraph."""
+        """Конвертировать ProcessGraph в protobuf ProcessGraph.
+
+        Клиент может передать как Pydantic-модель, так и обычный dict
+        (например, из вебсокета). Чтобы избежать AttributeError при доступе
+        к полям, приводим вход к ProcessGraph через Pydantic.
+        """
+        if isinstance(process_graph, dict):
+            process_graph = ProcessGraph.model_validate(process_graph)
+
         return simulator_pb2.ProcessGraph(
             process_graph_id=process_graph.process_graph_id,
-            workplaces=[self._workplace_to_proto(wp) for wp in process_graph.workplaces],
+            workplaces=[
+                self._workplace_to_proto(wp) for wp in process_graph.workplaces
+            ],
             routes=[self._route_to_proto(r) for r in process_graph.routes],
         )
 
