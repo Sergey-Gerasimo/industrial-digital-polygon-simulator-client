@@ -1437,7 +1437,11 @@ class AsyncSimulationClient(AsyncBaseClient):
             product_quality=proto_supplier.product_quality,
             cost=proto_supplier.cost,
             special_delivery_cost=proto_supplier.special_delivery_cost,
-            quality_inspection=proto_supplier.quality_inspection_enabled,
+            quality_inspection=(
+                proto_supplier.quality_inspection_enabled
+                if proto_supplier.HasField("quality_inspection_enabled")
+                else False
+            ),
         )
 
     def _proto_to_worker(self, proto_worker):
