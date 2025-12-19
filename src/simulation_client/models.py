@@ -47,6 +47,7 @@ class Supplier(BaseModel):
     product_quality: float
     cost: int
     special_delivery_cost: int
+    quality_inspection: bool = False
 
     model_config = ConfigDict(from_attributes=True)
 
@@ -185,7 +186,9 @@ class SimulationParameters(BaseModel):
     processes: Optional[ProcessGraph] = None
     tenders: List[Tender] = Field(default_factory=list)
     dealing_with_defects: str = ""
-    production_improvements: List["LeanImprovement"] = Field(default_factory=list)  # В proto: repeated LeanImprovement
+    production_improvements: List["LeanImprovement"] = Field(
+        default_factory=list
+    )  # В proto: repeated LeanImprovement
     sales_strategy: str = ""
     production_schedule: Optional["ProductionSchedule"] = None
     certifications: List["Certification"] = Field(default_factory=list)
@@ -196,7 +199,9 @@ class SimulationParameters(BaseModel):
     step: int = 0
     capital: int = 0
 
-    model_config = ConfigDict(from_attributes=True, extra='ignore')  # Игнорируем лишние поля из proto (например, has_certification)
+    model_config = ConfigDict(
+        from_attributes=True, extra="ignore"
+    )  # Игнорируем лишние поля из proto (например, has_certification)
 
 
 class SimulationResults(BaseModel):
@@ -1159,7 +1164,7 @@ class UnSetWorkerOnWorkplaceRequest(BaseModel):
 # CreateSimulationRequest удален - в proto используется CreateSimulationRquest (опечатка в proto, но нужно следовать proto)
 
 
-# ConfigureWorkplaceInGraphRequest, RemoveWorkplaceFromGraphRequest, 
+# ConfigureWorkplaceInGraphRequest, RemoveWorkplaceFromGraphRequest,
 # SetWorkplaceAsStartNodeRequest, SetWorkplaceAsEndNodeRequest удалены - их нет в proto
 # Используйте UpdateProcessGraphRequest для изменения графа процесса
 
