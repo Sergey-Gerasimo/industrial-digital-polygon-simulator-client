@@ -1437,7 +1437,7 @@ class AsyncSimulationClient(AsyncBaseClient):
             product_quality=proto_supplier.product_quality,
             cost=proto_supplier.cost,
             special_delivery_cost=proto_supplier.special_delivery_cost,
-            quality_inspection=proto_supplier.quality_inspection,
+            quality_inspection=proto_supplier.quality_inspection_enabled,
         )
 
     def _proto_to_worker(self, proto_worker):
