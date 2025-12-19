@@ -3,8 +3,8 @@ Generated protobuf and gRPC code.
 This module is auto-generated from simulator.proto file.
 """
 
-from . import simulator_pb2
-from . import simulator_pb2_grpc
+from .simulator_pb2 import *
+from .simulator_pb2_grpc import *
 
 __all__ = [
     "simulator_pb2",
