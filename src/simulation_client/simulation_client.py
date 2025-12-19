@@ -2736,7 +2736,23 @@ class AsyncSimulationClient(AsyncBaseClient):
         )
 
     def _production_plan_row_to_proto(self, row: "ProductionPlanRow"):
-        """Конвертировать ProductionPlanRow в protobuf."""
+        """Конвертировать ProductionPlanRow в protobuf.
+
+        Поддерживает вход как Pydantic-модель, так и словарь (например, из вебсокета).
+        Нормализуем альтернативные ключи из фронта: planned_date -> plan_date,
+        remaining_quantity -> remaining_to_produce.
+        """
+        if isinstance(row, dict):
+            from copy import deepcopy
+            from .models import ProductionPlanRow
+
+            data = deepcopy(row)
+            if "planned_date" in data and "plan_date" not in data:
+                data["plan_date"] = data["planned_date"]
+            if "remaining_quantity" in data and "remaining_to_produce" not in data:
+                data["remaining_to_produce"] = data["remaining_quantity"]
+            row = ProductionPlanRow.model_validate(data)
+
         return simulator_pb2.ProductionPlanRow(
             tender_id=row.tender_id,
             product_name=row.product_name,
